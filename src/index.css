@@ -1,0 +1,24 @@
+/* || DOCUMENT */
+
+html {
+    font-family: "Josefin Sans";
+}
+
+body {
+    --width: min(85vw, 32rem);
+    --padding-inline: calc((100vw - var(var(--width))) / 2);
+    --padding-block: 2.75rem;
+    --bg-color: light-dark(var(--gray-50), var(--navy-950));
+    --bg-image: light-dark(
+        url("./assets/images/bg-mobile-light.jpg"),
+        url("./assets/images/bg-mobile-dark.jpg")
+    );
+
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+    padding: var(--padding-block) var(--padding-inline);
+    background:
+        var(--bg-image) no-repeat 0 0 / 100% auto,
+        var(--bg-color);
+}
