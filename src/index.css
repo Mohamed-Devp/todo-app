@@ -6,7 +6,7 @@ html {
 
 body {
     --width: min(85vw, 32rem);
-    --padding-inline: calc((100vw - var(var(--width))) / 2);
+    --padding-inline: calc((100vw - var(--width)) / 2);
     --padding-block: 2.75rem;
     --bg-color: light-dark(var(--gray-50), var(--navy-950));
     --bg-image: light-dark(
@@ -21,4 +21,22 @@ body {
     background:
         var(--bg-image) no-repeat 0 0 / 100% auto,
         var(--bg-color);
+}
+
+/* || MEDIA QUERIES */
+
+@media (min-width: 40rem) {
+    body {
+        --padding-block: 4.5rem;
+        gap: 2.5rem;
+    }
+}
+
+@media (min-width: 48rem) {
+    body {
+        --bg-image: light-dark(
+            url("./assets/images/bg-desktop-light.jpg"),
+            url("./assets/images/bg-desktop-dark.jpg")
+        );
+    }
 }
