@@ -1,0 +1,15 @@
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.75rem;
+    color: hsl(0, 0%, 100%);
+}
+
+/* || MEDIA QUERIES */
+
+@media (min-width: 40rem) {
+    .logo {
+        font-size: 2.25rem;
+    }
+}
