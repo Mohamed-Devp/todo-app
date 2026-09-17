@@ -1,6 +1,6 @@
 function createElement(
     tagName,
-    { className = "", text = "", children = [], attrs: {} },
+    { className = "", text = "", children = [], attrs = {} },
 ) {
     const element = document.createElement(tagName);
 
