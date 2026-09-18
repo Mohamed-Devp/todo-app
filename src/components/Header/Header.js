@@ -35,6 +35,27 @@ function createSwitch() {
         },
     });
 
+    const switchTheme = () => {
+        const root = document.documentElement;
+
+        const current = root.getAttribute("data-theme");
+        const next = current === "light" ? "dark" : "light";
+
+        root.setAttribute("data-theme", next);
+        if (next === "light") {
+            switchBtn.classList.remove("switch_theme_dark");
+            switchBtn.classList.add("switch_theme_light");
+        } else {
+            switchBtn.classList.remove("switch_theme_light");
+            switchBtn.classList.add("switch_theme_dark");
+        }
+    };
+
+    const root = document.documentElement;
+    root.setAttribute("data-theme", "light");
+
+    switchBtn.addEventListener("click", switchTheme);
+
     return switchBtn;
 }
 
