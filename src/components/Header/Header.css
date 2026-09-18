@@ -1,0 +1,31 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.switch {
+    width: 1.25rem;
+    cursor: pointer;
+}
+
+.switch__icon {
+    width: 100%;
+    height: auto;
+}
+
+.switch_theme_light .switch__icon_theme_light {
+    display: none;
+}
+
+.switch_theme_dark .switch__icon_theme_dark {
+    display: none;
+}
+
+/* || MEDIA QUERIES */
+
+@media (min-width: 40rem) {
+    .switch {
+        width: 1.5rem;
+    }
+}
