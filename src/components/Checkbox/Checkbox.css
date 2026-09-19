@@ -1,0 +1,40 @@
+.checkbox {
+    --check-size: 0.5rem;
+    --border-width: 2px;
+    --border-color: light-dark(var(--gray-300), var(--purple-600));
+    --bg: linear-gradient(light-dark(hsl(0, 100%, 100%), var(--navy-900)));
+
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: var(--border-width) solid var(--border-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.checkbox:hover {
+    padding: var(--border-width);
+    border: none;
+    background:
+        var(--bg) no-repeat center / 100%,
+        var(--check-gradient) no-repeat center / 100%;
+    background-clip: content-box, padding-box;
+}
+
+.checkbox:checked {
+    border: none;
+    background:
+        url("icon-check.svg") no-repeat center / var(--check-size),
+        var(--check-gradient) no-repeat center / 100%;
+}
+
+/* || MEDIA QUERIES */
+
+@media (min-width: 40rem) {
+    .checkbox {
+        --check-size: 0.625rem;
+
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
