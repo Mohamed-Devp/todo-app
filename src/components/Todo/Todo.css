@@ -1,0 +1,46 @@
+.todo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    background-color: hsl(0, 100%, 100%);
+}
+
+.todo__description {
+    font-size: 0.875rem;
+    line-height: 1;
+    color: light-dark(var(--navy-850), var(--purple-300));
+}
+
+.todo__remove-btn {
+    width: 0.875rem;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.todo__icon {
+    width: 100%;
+    height: auto;
+}
+
+/* || MEDIA QUERIES */
+
+@media (min-width: 40rem) {
+    .todo {
+        gap: 1.5rem;
+        padding: 1.25rem 1.5rem;
+    }
+
+    .todo__description {
+        font-size: 1.125rem;
+    }
+
+    .todo__remove-btn {
+        width: 1rem;
+        opacity: 0;
+    }
+
+    .todo:hover .todo__remove-btn {
+        opacity: 1;
+    }
+}
