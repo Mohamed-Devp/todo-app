@@ -34,7 +34,7 @@ export default function createTodo(id, description, isCompleted) {
     });
 
     const todo = createElement("li", {
-        className: "todo",
+        className: isCompleted ? "todo todo_completed" : "todo",
         children: [checkbox, descriptionLabel, removeBtn],
     });
 

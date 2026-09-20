@@ -12,6 +12,11 @@
     color: light-dark(var(--navy-850), var(--purple-300));
 }
 
+.todo_completed .todo__description {
+    text-decoration: line-through;
+    color: light-dark(var(--gray-300), var(--purple-600));
+}
+
 .todo__remove-btn {
     width: 0.875rem;
     margin-left: auto;
