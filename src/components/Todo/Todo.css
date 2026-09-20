@@ -3,7 +3,7 @@
     align-items: center;
     gap: 0.75rem;
     padding: 0.875rem 1.25rem;
-    background-color: hsl(0, 100%, 100%);
+    border-top: 1px solid light-dark(var(--gray-300), var(--purple-600));
 }
 
 .todo__description {
