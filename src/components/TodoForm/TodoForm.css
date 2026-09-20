@@ -1,0 +1,46 @@
+.todo-form {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    border-radius: 0.25rem;
+    background-color: light-dark(hsl(0, 100%, 100%), var(--navy-900));
+}
+
+.todo-form__field {
+    outline: none;
+    font-size: 0.875rem;
+    line-height: 1;
+    color: light-dark(var(--navy-850), var(--purple-300));
+}
+
+.todo-form__field::placeholder {
+    color: light-dark(var(--gray-600), var(--purple-600));
+}
+
+.todo-form__submit-btn {
+    width: 0.875rem;
+    cursor: pointer;
+}
+
+.todo-form__icon {
+    width: 100%;
+    height: auto;
+}
+
+/* || MEDIA QUERIES */
+
+@media (min-width: 40rem) {
+    .todo-form {
+        gap: 1.5rem;
+        padding: 1.25rem 1.5rem;
+    }
+
+    .todo-form__field {
+        font-size: 1.125rem;
+    }
+
+    .todo-form__submit-btn {
+        width: 1.125rem;
+    }
+}
