@@ -1,5 +1,6 @@
 import "./TodoForm.css";
 
+import todos from "../../todos.js";
 import { createElement } from "../../utils.js";
 import createCheckbox from "../../components/Checkbox/Checkbox.js";
 
@@ -8,6 +9,15 @@ import IconPlus from "./icon-plus.svg";
 export default function createTodoForm() {
     let description = "",
         isCompleted = false;
+
+    const onTodoFormSubmit = (e) => {
+        e.preventDefault;
+
+        if (description.length > 0) {
+            todos.addTodo(description, isCompleted);
+            e.target.reset();
+        }
+    };
 
     const checkbox = createCheckbox("todo-checkbox", isCompleted, (e) => {
         const tgt = e.target;
@@ -43,6 +53,8 @@ export default function createTodoForm() {
         children: [checkbox, descriptionField, submitBtn],
         attrs: { novalidate: "novalidate" },
     });
+
+    todoForm.addEventListener("submit", onTodoFormSubmit);
 
     return todoForm;
 }
