@@ -1,0 +1,82 @@
+.todos-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.todos-panel_empty {
+    display: none;
+}
+
+.todos-panel__tabs-bar {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 1rem 1.25rem;
+    border-radius: 0.25rem;
+    background-color: light-dark(hsl(0, 100%, 100%), var(--navy-900));
+    box-shadow: 0 16px 24px hsla(235, 21%, 11%, 0.1);
+}
+
+.todos-panel__inner {
+    border-radius: 0.25rem;
+    background-color: light-dark(hsl(0, 100%, 100%), var(--navy-900));
+    box-shadow: 0 16px 24px hsla(235, 21%, 11%, 0.1);
+}
+
+.todos-panel__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+}
+
+.todos-panel__text {
+    font-size: 0.75rem;
+    color: light-dark(var(--gray-600), var(--purple-600));
+}
+
+.todos-panel__tabs {
+    display: none;
+    gap: 1.25rem;
+}
+
+.todos-panel__tab {
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: light-dark(var(--gray-600), var(--purple-600));
+}
+
+.todos-panel__tab:hover {
+    color: light-dark(var(--navy-850), var(--purple-300));
+}
+
+.todos-panel__tab_selected {
+    color: var(--blue-500);
+}
+
+.todos-panel__clear-btn {
+    cursor: pointer;
+}
+
+.todos-panel__clear-btn:hover {
+    color: light-dark(var(--navy-850), var(--purple-300));
+}
+
+/* || MEDIA QUERIES */
+
+@media (min-width: 32rem) {
+    .todos-panel__tabs-bar {
+        display: none;
+    }
+
+    .todos-panel__tabs {
+        display: flex;
+    }
+}
+
+@media (min-width: 40rem) {
+    .todos-panel__text {
+        font-size: 0.875rem;
+    }
+}
