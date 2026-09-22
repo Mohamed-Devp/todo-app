@@ -25,7 +25,7 @@ class Todos {
     }
 
     removeTodo(id) {
-        const filteredList = this.list.filter((todo) => todo.id === id);
+        const filteredList = this.list.filter((todo) => todo.id !== id);
         this.list = filteredList;
 
         pubsub.publish("todos:list-updated", this.list);
