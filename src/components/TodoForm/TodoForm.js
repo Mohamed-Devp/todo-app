@@ -15,7 +15,10 @@ export default function createTodoForm() {
 
         if (description.length > 0) {
             todos.addTodo(description, isCompleted);
+
             e.target.reset();
+            description = "";
+            isCompleted = false;
         }
     };
 
