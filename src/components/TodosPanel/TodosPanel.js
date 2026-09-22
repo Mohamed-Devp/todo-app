@@ -87,6 +87,10 @@ function createHeader() {
         pubsub.publish("tabs:tab-changed", newTab);
     });
 
+    clearBtn.addEventListener("click", () => {
+        todos.clearCompleted();
+    });
+
     pubsub.subscribe("todos:list-updated", (newList) => {
         const activeTodos = newList.filter((todo) => !todo.isCompleted);
         itemsLeft.textContent = `${activeTodos.length} items left`;
