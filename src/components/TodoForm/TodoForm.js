@@ -11,7 +11,7 @@ export default function createTodoForm() {
         isCompleted = false;
 
     const onTodoFormSubmit = (e) => {
-        e.preventDefault;
+        e.preventDefault();
 
         if (description.length > 0) {
             todos.addTodo(description, isCompleted);
