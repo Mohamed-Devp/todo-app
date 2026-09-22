@@ -1,6 +1,7 @@
 import "./TodosPanel.css";
 
 import pubsub from "../../pubsub.js";
+import todos from "../../todos.js";
 import { createElement } from "../../utils.js";
 import createTodo from "../../components/Todo/Todo.js";
 
@@ -26,6 +27,17 @@ function createTabsBar() {
     const tabsBar = createElement("div", {
         className: "todos-panel__tabs-bar",
         children: tabBtns,
+    });
+
+    pubsub.subscribe("tabs:tab-changed", (newTab) => {
+        tabBtns.forEach((tabBtn) => {
+            const tab = tabBtn.dataset.tab;
+
+            tabBtn.classList.remove("todos-panel__tab_selected");
+            if (tab === newTab) {
+                tabBtn.classList.add("todos-panel__tab_selected");
+            }
+        });
     });
 
     return tabsBar;
@@ -70,28 +82,52 @@ function createHeader() {
         children: [itemsLeft, tabs, clearBtn],
     });
 
+    tabs.addEventListener("click", (e) => {
+        const newTab = e.target.dataset.tab;
+        pubsub.publish("tabs:tab-changed", newTab);
+    });
+
     pubsub.subscribe("todos:list-updated", (newList) => {
         const activeTodos = newList.filter((todo) => !todo.isCompleted);
         itemsLeft.textContent = `${activeTodos.length} items left`;
+    });
+
+    pubsub.subscribe("tabs:tab-changed", (newTab) => {
+        tabBtns.forEach((tabBtn) => {
+            const tab = tabBtn.dataset.tab;
+
+            tabBtn.classList.remove("todos-panel__tab_selected");
+            if (tab === newTab) {
+                tabBtn.classList.add("todos-panel__tab_selected");
+            }
+        });
     });
 
     return header;
 }
 
 function createList() {
+    let activeTab = "all";
+
     const list = createElement("ul", {
         className: "todos-panel__list",
     });
 
-    pubsub.subscribe("todos:list-updated", (newList) => {
+    const updateListView = () => {
         list.innerHTML = "";
 
-        newList.forEach((todo) => {
+        let filteredList = todos.getTodos(activeTab);
+        filteredList.forEach((todo) => {
             const { id, description, isCompleted } = todo;
-
-            const todoEl = createTodo(id, description, isCompleted);
-            list.appendChild(todoEl);
+            list.appendChild(createTodo(id, description, isCompleted));
         });
+    };
+
+    pubsub.subscribe("todos:list-updated", updateListView);
+
+    pubsub.subscribe("tabs:tab-changed", (newTab) => {
+        activeTab = newTab;
+        updateListView();
     });
 
     return list;
@@ -107,6 +143,11 @@ export default function createTodosPanel() {
     const todosPanel = createElement("div", {
         className: "todos-panel todos-panel_empty",
         children: [tabsBar, listContainer],
+    });
+
+    tabsBar.addEventListener("click", (e) => {
+        const newTab = e.target.dataset.tab;
+        pubsub.publish("tabs:tab-changed", newTab);
     });
 
     pubsub.subscribe("todos:list-updated", (newList) => {
