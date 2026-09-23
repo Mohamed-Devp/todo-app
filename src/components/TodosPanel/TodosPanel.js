@@ -5,63 +5,45 @@ import todos from "../../todos.js";
 import { createElement } from "../../utils.js";
 import createTodo from "../../components/Todo/Todo.js";
 
-function createTabsBar() {
-    const tabBtns = [
-        createElement("button", {
-            className: "todos-panel__tab todos-panel__tab_selected",
-            text: "All",
-            attrs: { "data-tab": "all" },
-        }),
-        createElement("button", {
-            className: "todos-panel__tab",
-            text: "Active",
-            attrs: { "data-tab": "active" },
-        }),
-        createElement("button", {
-            className: "todos-panel__tab",
-            text: "Completed",
-            attrs: { "data-tab": "completed" },
-        }),
-    ];
-
-    const tabsBar = createElement("div", {
-        className: "todos-panel__tabs-bar",
-        children: tabBtns,
+function createTabBtn(tab, isSelected) {
+    const tabBtn = createElement("button", {
+        className: isSelected
+            ? "todos-panel__tab todos-panel__tab_selected"
+            : "todos-panel__tab",
+        text: tab,
     });
 
-    pubsub.subscribe("tabs:tab-changed", (newTab) => {
-        tabBtns.forEach((tabBtn) => {
-            const tab = tabBtn.dataset.tab;
+    const onTabBtnClick = () => {
+        pubsub.publish("tabs:tab-changed", tab);
+    };
 
+    tabBtn.addEventListener("click", onTabBtnClick);
+
+    pubsub.subscribe("tabs:tab-changed", (newTab) => {
+        if (tab === newTab) {
+            tabBtn.classList.add("todos-panel__tab_selected");
+        } else {
             tabBtn.classList.remove("todos-panel__tab_selected");
-            if (tab === newTab) {
-                tabBtn.classList.add("todos-panel__tab_selected");
-            }
-        });
+        }
+    });
+
+    return tabBtn;
+}
+
+function createTabsBar() {
+    const tabsBar = createElement("div", {
+        className: "todos-panel__tabs-bar",
+        children: [
+            createTabBtn("All", true),
+            createTabBtn("Active", false),
+            createTabBtn("Completed", false),
+        ],
     });
 
     return tabsBar;
 }
 
 function createHeader() {
-    const tabBtns = [
-        createElement("button", {
-            className: "todos-panel__tab todos-panel__tab_selected",
-            text: "All",
-            attrs: { "data-tab": "all" },
-        }),
-        createElement("button", {
-            className: "todos-panel__tab",
-            text: "Active",
-            attrs: { "data-tab": "active" },
-        }),
-        createElement("button", {
-            className: "todos-panel__tab",
-            text: "Completed",
-            attrs: { "data-tab": "completed" },
-        }),
-    ];
-
     const itemsLeft = createElement("p", {
         className: "todos-panel__text",
         text: "0 items left",
@@ -69,7 +51,11 @@ function createHeader() {
 
     const tabs = createElement("div", {
         className: "todos-panel__tabs",
-        children: tabBtns,
+        children: [
+            createTabBtn("All", true),
+            createTabBtn("Active", false),
+            createTabBtn("Completed", false),
+        ],
     });
 
     const clearBtn = createElement("p", {
@@ -82,11 +68,6 @@ function createHeader() {
         children: [itemsLeft, tabs, clearBtn],
     });
 
-    tabs.addEventListener("click", (e) => {
-        const newTab = e.target.dataset.tab;
-        pubsub.publish("tabs:tab-changed", newTab);
-    });
-
     clearBtn.addEventListener("click", () => {
         todos.clearCompleted();
     });
@@ -96,22 +77,11 @@ function createHeader() {
         itemsLeft.textContent = `${activeTodos.length} items left`;
     });
 
-    pubsub.subscribe("tabs:tab-changed", (newTab) => {
-        tabBtns.forEach((tabBtn) => {
-            const tab = tabBtn.dataset.tab;
-
-            tabBtn.classList.remove("todos-panel__tab_selected");
-            if (tab === newTab) {
-                tabBtn.classList.add("todos-panel__tab_selected");
-            }
-        });
-    });
-
     return header;
 }
 
 function createList() {
-    let activeTab = "all";
+    let activeTab = "All";
 
     const list = createElement("ul", {
         className: "todos-panel__list",
@@ -120,7 +90,9 @@ function createList() {
     const updateListView = () => {
         list.innerHTML = "";
 
-        let filteredList = todos.getTodos(activeTab);
+        const filter = activeTab.toLowerCase();
+        let filteredList = todos.getTodos(filter);
+
         filteredList.forEach((todo) => {
             const { id, description, isCompleted } = todo;
             list.appendChild(createTodo(id, description, isCompleted));
@@ -147,11 +119,6 @@ export default function createTodosPanel() {
     const todosPanel = createElement("div", {
         className: "todos-panel todos-panel_empty",
         children: [tabsBar, listContainer],
-    });
-
-    tabsBar.addEventListener("click", (e) => {
-        const newTab = e.target.dataset.tab;
-        pubsub.publish("tabs:tab-changed", newTab);
     });
 
     pubsub.subscribe("todos:list-updated", (newList) => {
