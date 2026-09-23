@@ -15,13 +15,12 @@ class PubSub {
         this.events[event].push(subscription);
     }
 
-    unsubcsribe(event, id) {
+    unsubscribe(event, id) {
         if (!this.events[event]) return;
 
-        const filteredEvents = this.events.filter((subscription) => {
+        this.events[event] = this.events[event].filter((subscription) => {
             return subscription.id !== id;
         });
-        this.events = filteredEvents;
     }
 
     publish(event, data) {
