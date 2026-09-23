@@ -13,6 +13,8 @@ class PubSub {
 
         const subscription = { id, callback };
         this.events[event].push(subscription);
+
+        return id;
     }
 
     unsubscribe(event, id) {
