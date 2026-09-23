@@ -32,7 +32,7 @@ function createTabBtn(tab, isSelected) {
 
 function createTabsBar() {
     const tabsBar = createElement("div", {
-        className: "todos-panel__tabs-bar",
+        className: "todos-panel__tabs-bar todos-panel__container",
         children: [
             createTabBtn("All", true),
             createTabBtn("Active", false),
@@ -112,7 +112,7 @@ function createList() {
 export default function createTodosPanel() {
     const tabsBar = createTabsBar();
     const listContainer = createElement("div", {
-        className: "todos-panel__inner",
+        className: "todos-panel__container",
         children: [createHeader(), createList()],
     });
 

@@ -8,20 +8,17 @@
     display: none;
 }
 
-.todos-panel__tabs-bar {
-    display: flex;
-    justify-content: center;
-    gap: 1.25rem;
-    padding: 1rem 1.25rem;
+.todos-panel__container {
     border-radius: 0.25rem;
     background-color: light-dark(hsl(0, 100%, 100%), var(--navy-900));
     box-shadow: 0 16px 24px hsla(235, 21%, 11%, 0.1);
 }
 
-.todos-panel__inner {
-    border-radius: 0.25rem;
-    background-color: light-dark(hsl(0, 100%, 100%), var(--navy-900));
-    box-shadow: 0 16px 24px hsla(235, 21%, 11%, 0.1);
+.todos-panel__tabs-bar {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 1rem 1.25rem;
 }
 
 .todos-panel__header {
