@@ -13,7 +13,6 @@ export default function createTodoForm() {
         className: "todo-form__field",
         attrs: {
             type: "text",
-            name: "description",
             placeholder: "Create a new todo...",
             "aria-label": "Description",
         },
