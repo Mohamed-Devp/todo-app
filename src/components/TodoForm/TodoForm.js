@@ -7,25 +7,7 @@ import createCheckbox from "../../components/Checkbox/Checkbox.js";
 import IconPlus from "./icon-plus.svg";
 
 export default function createTodoForm() {
-    let description = "",
-        isCompleted = false;
-
-    const onTodoFormSubmit = (e) => {
-        e.preventDefault();
-
-        if (description.length > 0) {
-            todos.addTodo(description, isCompleted);
-
-            e.target.reset();
-            description = "";
-            isCompleted = false;
-        }
-    };
-
-    const checkbox = createCheckbox("todo-checkbox", isCompleted, (e) => {
-        const tgt = e.target;
-        isCompleted = tgt.checked;
-    });
+    const checkbox = createCheckbox("todo-checkbox", false);
 
     const descriptionField = createElement("input", {
         className: "todo-form__field",
@@ -35,10 +17,6 @@ export default function createTodoForm() {
             placeholder: "Create a new todo...",
             "aria-label": "Description",
         },
-    });
-
-    descriptionField.addEventListener("change", () => {
-        description = descriptionField.value;
     });
 
     const iconPlusImg = createElement("img", {
@@ -56,6 +34,18 @@ export default function createTodoForm() {
         children: [checkbox, descriptionField, submitBtn],
         attrs: { novalidate: "novalidate" },
     });
+
+    const onTodoFormSubmit = (e) => {
+        e.preventDefault();
+
+        const isCompleted = checkbox.checked;
+        const description = descriptionField.value.trim();
+
+        if (description.length > 0) {
+            todos.addTodo(description, isCompleted);
+            todoForm.reset();
+        }
+    };
 
     todoForm.addEventListener("submit", onTodoFormSubmit);
 
