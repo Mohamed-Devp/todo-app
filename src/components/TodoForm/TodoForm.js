@@ -9,6 +9,8 @@ import IconPlus from "./icon-plus.svg";
 export default function createTodoForm() {
     const checkbox = createCheckbox("todo-checkbox", false);
 
+    checkbox.setAttribute("aria-label", "Mark new todo as completed");
+
     const descriptionField = createElement("input", {
         className: "todo-form__field",
         attrs: {
