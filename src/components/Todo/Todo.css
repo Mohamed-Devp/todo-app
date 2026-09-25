@@ -45,7 +45,8 @@
         opacity: 0;
     }
 
-    .todo:hover .todo__remove-btn {
+    .todo:hover .todo__remove-btn,
+    .todo:focus-within .todo__remove-btn {
         opacity: 1;
     }
 }
