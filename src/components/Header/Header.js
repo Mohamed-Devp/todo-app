@@ -42,6 +42,7 @@ function createSwitch() {
         const next = current === "light" ? "dark" : "light";
 
         root.setAttribute("data-theme", next);
+        switchBtn.setAttribute("aria-checked", String(next === "dark"));
         if (next === "light") {
             switchBtn.classList.remove("switch_theme_dark");
             switchBtn.classList.add("switch_theme_light");
