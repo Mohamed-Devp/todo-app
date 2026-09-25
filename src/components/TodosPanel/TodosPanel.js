@@ -58,7 +58,7 @@ function createHeader() {
         ],
     });
 
-    const clearBtn = createElement("p", {
+    const clearBtn = createElement("button", {
         className: "todos-panel__clear-btn todos-panel__text",
         text: "Clear Completed",
     });
